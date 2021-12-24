@@ -10,7 +10,8 @@ class MyBarController extends Controller{
 
     public getIndex(_req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): void {
         res.render("mybar", {
-            layout: false
+            layout: false,
+            title: "My Bar",
         })
     }
 }

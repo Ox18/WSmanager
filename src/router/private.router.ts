@@ -2,14 +2,14 @@ import { Router } from "express";
 import { ROUTE_CONST } from "../consts/route.const";
 import HomeController from "../controller/home.controller";
 import MyBarController from "../controller/mybar.controller";
-import authMiddleware from "../config/auth.config";
+import loggedMidleware from "../middleware/logged.middleware";
 
 class PrivateRouter{
     public router: Router;
 
     constructor(){
         this.router = Router();
-        this.router.use(authMiddleware);
+        this.router.use(loggedMidleware);
         this.routes();
     }
 
