@@ -1,5 +1,6 @@
-function logged(_req: any, _res: any, next: any) {
-  next();
-  }
+function logged(req: any, res: any, next: any): void {
+  if(req.session.user) next();
+  else res.redirect("/login");
+}
   
   export default logged;

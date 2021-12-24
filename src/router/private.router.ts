@@ -1,15 +1,15 @@
 import { Router } from "express";
-import isLoggedIn from "../config/auth.config";
 import { ROUTE_CONST } from "../consts/route.const";
 import HomeController from "../controller/home.controller";
 import MyBarController from "../controller/mybar.controller";
+import authMiddleware from "../config/auth.config";
 
 class PrivateRouter{
     public router: Router;
 
     constructor(){
         this.router = Router();
-        this.router.use(isLoggedIn);
+        this.router.use(authMiddleware);
         this.routes();
     }
 
