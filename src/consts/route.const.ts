@@ -1,6 +1,6 @@
 export const ROUTE_CONST = {
     HOME: "/",
     LOGIN: "/login",
-    BAR: "/my-bar/:id",
+    BAR: "/my-bar",
     LOGOUT: "/logout",
 }

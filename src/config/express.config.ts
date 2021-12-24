@@ -19,7 +19,7 @@ import privateRouter from "../router/private.router";
 
 import handlebarsConfig from "./handlebars.config";
 
-function initExpress(): Server {
+function initExpress(): Application {
   const app: Application = express();
 
   app.set("env", "production");
@@ -68,9 +68,7 @@ function initExpress(): Server {
     res.render("404", { layout: false });
   });
 
-  return app.listen(app.get("port"), () => {
-    console.log(`Server on port ${app.get("port")}`); // tslint:disable-line
-  });
+  return app;
 }
 
 export default initExpress;
