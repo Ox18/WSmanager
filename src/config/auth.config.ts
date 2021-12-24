@@ -1,5 +1,5 @@
-function logged(_req: any, res: any) {
-    res.render("home", { layout: false });
+function logged(_req: any, _res: any, next: any) {
+  next();
   }
   
   export default logged;
