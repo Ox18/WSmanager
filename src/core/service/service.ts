@@ -1,7 +1,8 @@
 import firebase from "firebase/compat/app";
 import db from "../db/connection"
+import IServiceRepository from "../repository/service.repository";
 
-class Repository<T>{
+class Service<T> implements IServiceRepository<T>{
     connection: firebase.firestore.Firestore;
 
     constructor(public table: string){
@@ -15,11 +16,13 @@ class Repository<T>{
 
     async find(id: string): Promise<T>{
         const snapshot = await this.connection.collection(this.table).doc(id).get();
-        return snapshot.data() as T;
+        const data = snapshot.data() as T;
+        return data;
     }
 
     async create(data: T): Promise<void>{
-        await this.connection.collection(this.table).add(data);
+        const response = await this.connection.collection(this.table).add(data);
+        await this.connection.collection(this.table).doc(response.id).update({id: response.id});
     }
 
     async update(id: string, data: T): Promise<void>{
@@ -38,3 +41,5 @@ class Repository<T>{
         });
     }
 }
+
+export default Service;

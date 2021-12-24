@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
 import Controller from "./controller";
+import UserService from "../core/service/user.service";
 
 class LoginController extends Controller{
     constructor(){
@@ -17,16 +18,25 @@ class LoginController extends Controller{
 
     postIndex(req: any, res: any): void {
         const { username = "", password = "" } = req.body;
-        if(username === "admin" && password === "admin"){
-            req.session.user = {
-                username: username,
-                password: password,
-                name: "Admin"
-            };
-            res.redirect("/");
-            return;
-        }
-        res.redirect("/login");
+        const userService= new UserService();
+
+        userService.findByUsernameAndPassword(username, password)
+        .then(user => {
+            if(user){
+                req.session.user = user;
+                res.redirect("/");
+            }
+            else res.render("login", {
+                title: "Login",
+                layout: false,
+                error: "Invalid username or password"
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: error.message
+            })
+        });    
     }
 }
 

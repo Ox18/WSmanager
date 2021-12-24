@@ -9,7 +9,8 @@
     "start": "node .",
     "build": "tsc -p .",
     "dev": "nodemon src/app.ts",
-    "docs": "typedoc --entryPoints src/"
+    "docs": "typedoc --entryPoints src/",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
