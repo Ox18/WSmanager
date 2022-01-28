@@ -1,5 +1,37 @@
 {{> header }}
 
-my bar
+<a href="/">inicio</a>
+<a href="/logout">salir</a>
+
+<div class="container-box animate__animated animate__fadeIn">
+    <div class="spinner-border text-light" role="status" id="loading">
+       <span class="sr-only"></span>
+    </div>
+    <div id="powerMarkArea" style="visibility: hidden;" class="animate__animated animate__fadeIn">
+        <div class="contentPower">
+        </div>
+        <div class="contentPlayers">
+            {{!-- <div class="linePlayer linePlayer_1" style="left: 50px;">
+                wilmer
+            </div>
+            <div class="linePlayer linePlayer_2" style="left: 100px;">wilmer</div>
+            <div class="linePlayer linePlayer_3" style="left: 150px;">wilmer</div>
+            <div class="linePlayer linePlayer_4" style="left: 200px;">wilmer</div>
+            <div class="linePlayer" style="left: 300px;">wilmer</div> --}}
+        </div>
+    </div>
+</div>
+
+<div id="root">
+    <div class="account">
+        <div class="id">{{user.id}}</div>
+        <div class="name">{{user.name}}</div>
+        <div class="username">{{user.username}}</div>
+        <div class="password">{{user.password}}</div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="static/js/main.js"></script>
 
 {{> footer }}

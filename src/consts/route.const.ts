@@ -3,4 +3,5 @@ export const ROUTE_CONST = {
     LOGIN: "/login",
     BAR: "/my-bar",
     LOGOUT: "/logout",
-}
+    ADMIN: "/admin",
+};

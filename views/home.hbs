@@ -1,7 +1,11 @@
 {{> header }}
-<button id="send_bar">Enviar cliente barra</button>
-<button id="send_web">Enviar cliente web</button>
+
 <a href="/logout">salir</a>
-<script src="/socket.io/socket.io.js"></script>
-<script src="static/main.js"></script>r
+
+<a href="/my-bar">mi barra en linea</a>
+
+{{#if user.isAdmin}}
+    <a href="/admin">administrador</a>
+{{/if}}
+
 {{> footer }}

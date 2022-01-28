@@ -1,42 +1,43 @@
 import { Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-import Controller from "./controller";
+import User from "../core/entity/User.entity";
 import UserService from "../core/service/user.service";
+import Controller from "./controller";
 
-class LoginController extends Controller{
-    constructor(){
+class LoginController extends Controller {
+    constructor() {
         super();
     }
 
-    getIndex(_req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): void {
+    public getIndex(_req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): void {
         res.render("login", {
             title: "Login",
             layout: false
-        });    
+        });
     }
 
-    postIndex(req: any, res: any): void {
+    public postIndex(req: any, res: any): void {
         const { username = "", password = "" } = req.body;
-        const userService= new UserService();
+        const userService = new UserService();
 
         userService.findByUsernameAndPassword(username, password)
-        .then(user => {
-            if(user){
-                req.session.user = user;
-                res.redirect("/");
-            }
-            else res.render("login", {
+        .then((user: User) => {
+            if (user) {
+                if (user.account_active) {
+                    req.session.user = user;
+                    res.redirect("/");
+                } else { throw new Error("Account is not active"); }
+            } else { throw new Error("Username or password is incorrect"); }
+
+        })
+        .catch((error) => {
+            res.render("login", {
                 title: "Login",
                 layout: false,
-                error: "Invalid username or password"
+                error: error.message
             });
-        })
-        .catch(error => {
-            res.status(500).json({
-                message: error.message
-            })
-        });    
+        });
     }
 }
 

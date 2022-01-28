@@ -1,0 +1,42 @@
+{{> header }}
+
+<div class="container mt-5">
+
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Username</th>
+      <th scope="col">ROL</th>
+      <th scope="col">Cuenta activa</th>
+      <th scope="col">Licencia activa</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="list_user">
+    {{#each users}}
+      <tr>
+        <th scope="row">{{@index}}</th>
+        <td>{{name}}</td>
+        <td>{{username}}</td>
+        <td>{{rol}}</td>
+          <select>
+              <option value="true">si</option>
+              <option value="false">no</option>
+          </select>
+        </td>
+        <td>{{licence_active}}</td>
+        <td>
+          <button type="button" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+</div>
+<script src="/socket.io/socket.io.js"></t>
+<script src="static/js/administrador.js"></script>
+{{> footer }}

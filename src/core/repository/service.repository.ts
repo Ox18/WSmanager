@@ -1,4 +1,4 @@
-interface IServiceRepository<T>{
+interface IServiceRepository<T> {
     findAll(): Promise<T[]>;
     find(id: string): Promise<T>;
     create(data: T): Promise<void>;

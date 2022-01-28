@@ -6,5 +6,4 @@ import initSocket from "./config/socket.config";
 // Load Env File
 initLoadEnv();
 
-
 initSocket(initServer(initExpress()));

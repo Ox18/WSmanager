@@ -4,16 +4,16 @@ import HomeController from "../controller/home.controller";
 import MyBarController from "../controller/mybar.controller";
 import loggedMidleware from "../middleware/logged.middleware";
 
-class PrivateRouter{
+class PrivateRouter {
     public router: Router;
 
-    constructor(){
+    constructor() {
         this.router = Router();
         this.router.use(loggedMidleware);
         this.routes();
     }
 
-    private routes(){
+    private routes() {
         this.router.get(ROUTE_CONST.HOME, HomeController.getIndex);
         this.router.post(ROUTE_CONST.HOME, HomeController.postIndex);
         this.router.get(ROUTE_CONST.BAR, MyBarController.getIndex);

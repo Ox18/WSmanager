@@ -11,11 +11,11 @@ import path from "path";
 import exphbs from "express-handlebars";
 import sessions from "express-session";
 import helmet from "helmet";
-import { Server } from "http";
 
 import { DAY } from "../consts/other.const";
-import publicRouter from "../router/public.router";
+import adminRouter from "../router/admin.router";
 import privateRouter from "../router/private.router";
+import publicRouter from "../router/public.router";
 
 import handlebarsConfig from "./handlebars.config";
 
@@ -48,7 +48,7 @@ function initExpress(): Application {
       secret: "websocket",
       saveUninitialized: true,
       cookie: {
-        secure: false,
+        secure: true,
         maxAge: DAY.MILLISECONDS,
       },
       resave: false,
@@ -58,12 +58,9 @@ function initExpress(): Application {
 
   app.use("/static", express.static(path.join(__dirname, "/../../public")));
 
-  app.use(
-    "/favicon.ico",
-    express.static(path.join(__dirname, "/../../public/images/favicon.ico"))
-  );
   app.use(publicRouter);
   app.use(privateRouter);
+  app.use(adminRouter);
   app.use((_req: Request, res: Response) => {
     res.render("404", { layout: false });
   });
